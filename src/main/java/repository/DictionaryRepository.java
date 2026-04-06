@@ -13,15 +13,13 @@ import java.util.Objects;
 
 public class DictionaryRepository {
     private  final String masterDictionaryPath;
-    private final List<String> masterDictionary = new ArrayList<>();
-
     public DictionaryRepository(String masterDictionaryPath) {
         Objects.requireNonNull(masterDictionaryPath);
         this.masterDictionaryPath = masterDictionaryPath;
     }
 
     public List<String> loadMasterDictionary() {
-        masterDictionary.clear();
+        List<String> masterDictionary = new ArrayList<>();
         try (var in = DictionaryRepository.class.getResourceAsStream(masterDictionaryPath)) {
             if (in == null) {
                 throw new IllegalArgumentException("Master dictionary not found: " + masterDictionaryPath);
@@ -35,4 +33,5 @@ public class DictionaryRepository {
         } catch (IOException e) {
             throw new UncheckedIOException("Cannot read master dictionary: " + masterDictionaryPath, e);
         }
-    }}
+    }
+}

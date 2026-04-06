@@ -10,21 +10,22 @@ public class GameService {
     private final List<String> masterDictionary;
     private List<String> gameDictionary;
     private Game currentGame;
+    private final  int maxMisses;
 
-    public GameService(List<String> masterDictionary) {
+    public GameService(List<String> masterDictionary, int maxMisses) {
         this.masterDictionary = List.copyOf(masterDictionary);
         if (this.masterDictionary.isEmpty()) {
             throw new IllegalArgumentException("Master dictionary is empty");
         }
         this.gameDictionary = new ArrayList<>(this.masterDictionary);
         Collections.shuffle(this.gameDictionary);
-
+        this.maxMisses = maxMisses;
     }
 
     public Game startNewGame() {
         refillGameDictionaryIfNeeded();
         String secretWord = pickAndRemoveRandomWord();
-        currentGame = new Game(secretWord);
+        currentGame = new Game(secretWord, maxMisses);
         return currentGame;
     }
 
@@ -43,7 +44,7 @@ public class GameService {
     }
 
     private String pickAndRemoveRandomWord() {
-        return gameDictionary.remove(gameDictionary.size() - 1);
+        return gameDictionary.removeLast();
     }
 
 }

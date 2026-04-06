@@ -9,16 +9,17 @@ public class Game {
     private final char[] secretChars;
     private final char[] mask;
     private int missCount = 0;
-    private static final int MAX_MISSES = 6;
+    private final int maxMisses;
     private final Set<Character> guessedLetters = new HashSet<>();
 
 
 
-    public Game(String secretWord) {
+    public Game(String secretWord, int maxMisses) {
         this.secretWord = secretWord;
         this.secretChars = secretWord.toLowerCase().toCharArray();
         mask = new char[secretChars.length];
         Arrays.fill(mask, '_');
+        this.maxMisses = maxMisses;
     }
 
     public GuessResult guess(char letter) {
@@ -55,7 +56,7 @@ public class Game {
     }
 
     public boolean isLost() {
-        return missCount >= MAX_MISSES;
+        return missCount >= maxMisses;
     }
 
     public int getMissCount() {
@@ -66,13 +67,7 @@ public class Game {
         return secretWord;
     }
 
-    public  static boolean isCyrillicLetter(int codePoint) {
-        return Character.UnicodeScript.of(codePoint) == Character.UnicodeScript.CYRILLIC
-                && Character.isLetter(codePoint);
-
-    }
-
     public int getMaxMisses() {
-        return MAX_MISSES;
+        return maxMisses;
     }
 }

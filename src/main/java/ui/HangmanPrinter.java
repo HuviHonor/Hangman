@@ -8,7 +8,7 @@ public class HangmanPrinter {
          |
          |
          |
-        ===
+    ======
   """,
             """
      +---+
@@ -62,6 +62,10 @@ public class HangmanPrinter {
 
     public void print(int errorCount) {
         System.out.println(HANGMAN_STAGES[errorCount]);
+    }
+
+    public int getMaxMisses() {
+        return HANGMAN_STAGES.length - 1;
     }
 
 }
