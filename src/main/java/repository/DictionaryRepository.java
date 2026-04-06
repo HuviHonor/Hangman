@@ -27,11 +27,12 @@ public class DictionaryRepository {
                 throw new IllegalArgumentException("Master dictionary not found: " + masterDictionaryPath);
             }
             try (var reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
-                reader.lines().forEach(masterDictionary::add);
+                reader.lines()
+                        .filter(word -> word.length() >= 5)
+                        .forEach(masterDictionary::add);
                 return List.copyOf(masterDictionary);
             }
         } catch (IOException e) {
             throw new UncheckedIOException("Cannot read master dictionary: " + masterDictionaryPath, e);
         }
-    }
-}
+    }}

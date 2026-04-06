@@ -24,7 +24,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        DictionaryRepository repository = new DictionaryRepository("/dictionary.txt");
+        DictionaryRepository repository = new DictionaryRepository("/Dictionary.txt");
         List<String>  master = repository.loadMasterDictionary();
         GameService gameService = new GameService(master);
         HangmanPrinter printer = new HangmanPrinter();
